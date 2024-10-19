@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STINGRAYFX - Payment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>STINGRAYFX</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="payment.html">payment</li>
+                <li><a href="terms.html">Terms of Use</a></li>
+                <li><a href="promo code">Promo Code</a></li>
+                <li><a href="about us.html">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+    <section class="payment-section">
+        <h2>Enter Your Payment Details</h2>
+        <p>Please complete the form below to purchase the STINGRAYFX trading system for R2500.</p>
+        
+        <form action="process-payment.php" method="post" class="payment-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" required>
+            
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+            
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" required>
+            
+            <button type="submit" class="submit-btn">Pay Now</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 STINGRAYFX. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
