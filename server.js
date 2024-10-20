@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 // Home route to serve 'index.html'
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.send('Welcome to STINGRAYFX backend!');
 });
 
 // Payment route
@@ -36,11 +36,30 @@ app.post('/api/payment', (req, res) => {
     });
 });
 
-// Subscription route (using controller)
-const subscriptionRoutes = require('../routes/subscriptionRoutes');
+// Add subscription controller logic directly
+app.post('/api/subscribe', (req, res) => {
+    const { email, plan } = req.body;
+    // Assuming the data gets processed here (you can add more logic like saving to the DB)
+    res.json({
+        message: 'Subscription created successfully!',
+        email,
+        plan
+    });
+});
+
+// Subscription route (updated to use external controller)
+const subscriptionRoutes = require('./routes/subscriptionRoutes');  // Adjust path if necessary
 app.use('/api', subscriptionRoutes);
 
-// Start the server
+// Route to retrieve subscriptions (this can be replaced with real DB logic)
+app.get('/api/subscriptions', (req, res) => {
+    res.json({
+        message: 'Retrieved subscriptions!',
+        subscriptions: []  // Placeholder for real subscription data
+    });
+});
+
+// Start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
