@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const path = require('path'); // Added for static file serving
+const path = require('path');
+
+// Load environment variables
 require('dotenv').config();
 
 // Initialize express
@@ -11,45 +12,49 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // Replaced body-parser with built-in express.json()
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+// Print MongoDB URI for debugging
+console.log('MongoDB URI:', process.env.MONGODB_URI);
 
-// Home route to serve 'index.html'
+// Mongoose connection with added options
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+})
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch((err) => {
+        console.error('MongoDB connection error:', err.message);
+    });
+
+// Routes
+const subscriptionRoutes = require('./routes/subscriptionRoutes'); // Assuming the routes file is in 'routes'
+app.use('/api', subscriptionRoutes);  // Add subscription routes under '/api'
+
+// Home route
 app.get('/', (req, res) => {
     res.send('Welcome to STINGRAYFX backend!');
 });
 
-// Payment route
+// Payment route with error handling
 app.post('/api/payment', (req, res) => {
     const { method, amount } = req.body;
+    if (!method || !amount) {
+        return res.status(400).json({
+            error: 'Method and amount are required'
+        });
+    }
     res.json({
         message: 'Payment processed!',
         method,
         amount
     });
 });
-
-// Add subscription controller logic directly
-app.post('/api/subscribe', (req, res) => {
-    const { email, plan } = req.body;
-    // Assuming the data gets processed here (you can add more logic like saving to the DB)
-    res.json({
-        message: 'Subscription created successfully!',
-        email,
-        plan
-    });
-});
-
-// Subscription route (updated to use external controller)
-const subscriptionRoutes = require('./routes/subscriptionRoutes');  // Adjust path if necessary
-app.use('/api', subscriptionRoutes);
 
 // Route to retrieve subscriptions (this can be replaced with real DB logic)
 app.get('/api/subscriptions', (req, res) => {
