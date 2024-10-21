@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STINGRAYFX - Payment</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>STINGRAYFX</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="terms.html">Terms of Use</a></li>
+                <li><a href="promo code.html">Promo Code</a></li>
+                <li><a href="about us.html">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+    <section class="payment-section">
+        <h2>Enter Your Payment Details</h2>
+        <p>Please complete the form below to purchase the STINGRAYFX trading system for R2500.</p>
+        <form id="payment-form" class="payment-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+
+            <label for="card-element">Credit or Debit Card</label>
+            <div id="card-element" class="card-input"><!-- A Stripe Element will be inserted here. --></div>
+
+            <button type="submit" id="submit" class="submit-button">Pay Now</button>
+            <div id="card-errors" role="alert" class="error-message"></div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 STINGRAYFX. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe('YOUR_PUBLISHABLE_KEY'); // Replace with your Stripe publishable key
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element
+        cardElement.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Create payment method
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+                billing_details: {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                },
+            });
+
+            if (error) {
+                // Show error to the customer (e.g., insufficient funds)
+                const displayError = document.getElementById('card-errors');
+                displayError.textContent = error.message;
+            } else {
+                // Send paymentMethod.id to your server (in your case, to the /api/payment/handle-payment endpoint)
+                const response = await fetch('/api/payment/handle-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        paymentMethodId: paymentMethod.id,
+                        amount: 250000, // Amount in cents (R2500)
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Payment successful! Redirecting...');
+                    window.location.href = 'https://www.metatrader4.com'; // Redirect to MetaTrader 4
+                } else {
+                    alert('Payment failed: ' + result.error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

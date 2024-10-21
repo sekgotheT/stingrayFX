@@ -1,0 +1,423 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  /* Add a gradient background */
+  background: linear-gradient(to right, #ffccbc, #ffe0b2); /* Soft warm colors */
+  color: #333;
+}
+
+.container {
+  width: 100%; /* Ensure full width */
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1200px; /* Maximum width for larger screens */
+}
+
+/* Header Styles */
+header {
+  background-image: url('fx.jpg'); /* Background image */
+  background-size: cover; /* Make the image cover the whole header */
+  background-position: center; /* Center the image */
+  color: #fff;
+  padding: 60px 0; /* More padding to show the background image */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo img {
+  width: 100px;
+  height: auto;
+}
+
+nav {
+  float: right;
+  margin-top: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: blueviolet;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #ff6f61;
+  color: black;
+  border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  font-size: 2.5em;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #ff6600;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.cta-btn:hover {
+  background-color: #cc5200;
+}
+
+/* Features Section */
+.features-section {
+  background-image: url('fx1.jpg'); /* Set fx1.jpg as the background */
+  background-size: cover; /* Make the image cover the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Avoid the background image from repeating */
+  padding: 60px 20px; /* Add padding to provide space around the content */
+  color: #fff; /* Ensure text is visible on top of the background */
+  position: relative; /* For positioning child elements */
+}
+
+.features-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 60px 20px;
+}
+
+.feature-image img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.feature-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.feature-list {
+  margin-top: 20px;
+}
+
+.feature-item {
+  margin-bottom: 20px;
+}
+
+/* New System Features Section Styles */
+.feature-container {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space out items */
+}
+
+.features {
+  padding: 60px 20px; /* Add padding to provide space around the content */
+  background-color: #f5f5f5; /* Light background for better contrast */
+}
+
+.feature-list {
+  margin-top: 20px; /* Add margin to the top of the feature list */
+}
+
+.feature-item {
+  margin-bottom: 30px; /* Space out individual features */
+  background-color: rgba(255, 255, 255, 0.8); /* Light background for features */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.feature-item h4 {
+  font-size: 1.5rem; /* Adjust heading size */
+  color: #1c1c1c; /* Darker color for headings */
+}
+
+.feature-item p {
+  font-size: 1rem; /* Standard size for paragraph text */
+  color: #666; /* Lighter color for paragraph text */
+}
+
+/* Payment Form Styles */
+.payment-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.payment-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.payment-form input[type="text"],
+.payment-form input[type="email"],
+.payment-form .card-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.submit-button {
+    background-color: #1e88e5; /* Primary button color */
+    color: #fff;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for button */
+}
+
+.submit-button:hover {
+    background-color: #1565c0; /* Darker shade on hover */
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: center; /* Center align the error message */
+}
+
+/* Promo Code Section */
+.promo-code {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.promo-code h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #1c1c1c;
+}
+
+.promo-form {
+  margin-top: 20px;
+}
+
+.promo-form label {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.promo-form input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.promo-form button {
+  padding: 10px 20px;
+  background-color: #ff6f61;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.promo-form button:hover {
+  background-color: #e64e42;
+}
+
+#discountMessage {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* Pricing Section */
+.pricing {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.pricing h3 {
+  font-size: 2rem;
+  color: #1c1c1c;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pricing-table {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.pricing-option {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  width: 45%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  text-align: center;
+}
+
+.pricing-option h4 {
+  font-size: 1.5rem;
+  color: #1c1c1c;
+  margin-bottom: 15px;
+}
+
+.pricing-option p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.payment-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.payment-info ul li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.disclaimer {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Contact Form Section */
+.contact-form {
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+.contact-form h3 {
+  font-size: 2rem;
+  color: #1c1c1c;
+}
+
+.contact-form label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+  color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.contact-form button {
+  padding: 10px 20px;
+  background-color: #ff6f61;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #e64e42;
+}
+
+/* Footer */
+footer {
+  background-color: #1c1c1c;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column; /* Stack features on smaller screens */
+  }
+  
+  .pricing-option {
+    width: 100%; /* Full width for pricing options on smaller screens */
+  }
+
+  header {
+    flex-direction: column; /* Stack items in header on smaller screens */
+    align-items: center; /* Center items */
+  }
+  
+  nav ul {
+    flex-direction: column; /* Stack nav items vertically */
+  }
+  
+  nav ul li {
+    margin-left: 0; /* Reset margin for vertical stacking */
+    margin-bottom: 10px; /* Add space between items */
+  }
+}

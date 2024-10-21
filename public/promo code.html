@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STINGRAYFX - Promo Code</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script>
+    // Simple promo code validation and discount calculation (for front-end testing only)
+    function applyPromoCode() {
+      var promoCodeInput = document.getElementById("promoCode").value;
+      var originalPrice = 2500;  // Assuming system price is R2500
+      var discount = 0;
+      
+      // Sample promo codes and their corresponding discounts
+      var promoCodes = {
+        "STINGRAY10": 10,   // 10% discount
+        "STINGRAY20": 20,   // 20% discount
+        "STINGRAY30": 30,   // 30% discount
+        "STINGRAY40": 40,   // 40% discount
+        "STINGRAY50": 50    // 50% discount
+      };
+
+      if (promoCodes[promoCodeInput]) {
+        discount = promoCodes[promoCodeInput];
+        var discountedPrice = originalPrice - (originalPrice * discount / 100);
+        document.getElementById("discountMessage").innerHTML = `Promo code applied! You get a ${discount}% discount. Your total is R${discountedPrice}.`;
+        document.getElementById("discountMessage").style.color = "green";
+      } else {
+        document.getElementById("discountMessage").innerHTML = "Invalid promo code. Please try again.";
+        document.getElementById("discountMessage").style.color = "red";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Header and Navigation -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>STINGRAYFX</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="promo code.html">Promo Code</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="#payment.html">payment</li>
+          <li><a href="about us.html">About Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Promo Code Section -->
+  <section id="promo-code" class="promo-code">
+    <div class="container">
+      <h3>Promo Code Portal</h3>
+      <p>Enter your promo code below to get an exclusive discount on the STINGRAYFX system!</p>
+      
+      <div class="promo-form">
+        <label for="promoCode">Promo Code:</label>
+        <input type="text" id="promoCode" placeholder="Enter promo code">
+        <button onclick="applyPromoCode()">Apply Code</button>
+        <p id="discountMessage"></p>
+      </div>
+
+      <div class="original-price">
+        <p><strong>Original Price:</strong> R2500</p>
+        <p><strong>System Features:</strong> Lifetime access to STINGRAYFX Forex Trading System.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2024 STINGRAYFX | All Rights Reserved</p>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
