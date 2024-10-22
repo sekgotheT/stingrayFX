@@ -1,5 +1,3 @@
-// script.js
-
 // Function to handle promo code validation and discount calculation
 function applyPromoCode() {
   var promoCodeInput = document.getElementById("promoCode").value;
@@ -60,6 +58,28 @@ function validateEmail(email) {
   return re.test(email);
 }
 
+// Attach the validateContactForm function to the form submission
+document.getElementById("contact-form").addEventListener("submit", validateContactForm);
+
+// Function to handle contact form submission with fetch
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(this);
+    fetch('/submit-contact', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('confirmationMessage').innerText = data.message;
+        document.getElementById('confirmationMessage').style.display = 'block';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
 // Navigation active link highlight
 function setActiveLink() {
   var currentLocation = window.location.href;
@@ -85,6 +105,3 @@ function togglePricingDetails() {
 window.onload = function() {
   setActiveLink();
 };
-
-// Attach the validateContactForm function to the form submission
-document.getElementById("contact-form").addEventListener("submit", validateContactForm);
