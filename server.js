@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Make sure to set your Stripe secret key in .env
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
@@ -23,6 +24,15 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch((err) => {
         console.error('MongoDB connection error:', err.message);
     });
+
+// Email configuration
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL, // Your email from .env
+        pass: process.env.PASSWORD // Your email password or app password
+    }
+});
 
 // Home route
 app.get('/', (req, res) => {
@@ -66,6 +76,30 @@ app.post('/api/payment/handle-payment', async (req, res) => {
     } catch (error) {
         res.status(500).send({ success: false, error: error.message });
     }
+});
+
+// Endpoint for contact form submissions
+app.post('/contact', (req, res) => {
+    const { name, email, message } = req.body;
+
+    // Prepare the email
+    const mailOptions = {
+        from: email, // Sender's email
+        to: process.env.EMAIL, // Your email to receive the message
+        subject: `New Contact Form Submission from ${name}`,
+        text: `You have a new message from ${name} (${email}):\n\n${message}`
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Something went wrong. Please try again later.');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).send('Message sent successfully.');
+        }
+    });
 });
 
 // Start server
